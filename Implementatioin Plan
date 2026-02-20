@@ -1,0 +1,65 @@
+1. Problem Analysis
+The primary challenge of this project is converting a polar area diagram (where data is represented by the area of sectors radiating from a center) into linear numerical values.
+
+Coordinate Complexity: Unlike a standard X-Y plot, we must handle 24 rotating segments. Each month has a shared origin point but different radii for three categories.
+
+Scale Calibration: The diagram doesn't provide a digital scale. We must establish a ratio between "pixels on screen" and "actual death counts" based on the legend.
+
+Manual Precision: Clicking 72+ precise points (24 months × 3 categories) is prone to fatigue and error.
+
+Perspective/Rotation: The original historical scan might not be perfectly centered or aligned.
+
+2. User Workflow
+Initialization: Load the image and set the "Center Point" of the rose.
+
+Calibration: Click a known reference point (e.g., a specific value on the diagram's scale) to establish a pixels-to-units ratio.
+
+Sequential Capture: The app prompts the user month-by-month (starting April 1854).
+
+The user clicks the outer edge of the Blue (Wounds), Red (Preventable), and Black (Other) wedges.
+
+Validation: Review points visually on the canvas.
+
+Export: Save the calculated radii/areas to a CSV/JSON file.
+
+3. Data Structure Design
+We will use a nested dictionary structure to maintain clarity, which will then be flattened for CSV export.
+
+{
+  "metadata": {
+    "center_coords": [x, y],
+    "px_to_unit_ratio": 0.0,
+    "image_path": "nightingale.jpg"
+  },
+  "measurements": [
+    {
+      "month": "April 1854",
+      "preventable_disease": {"px_radius": 120, "value": 0.0},
+      "wounds": {"px_radius": 45, "value": 0.0},
+      "other": {"px_radius": 20, "value": 0.0}
+    }
+    // ... total 24 months
+  ]
+}
+
+4. Feature                  Breakdown
+Component,                  Functionality
+Canvas Engine,              Use matplotlib for built-in zoom/pan and event handling (mpl_connect).
+Input Controller,           "Keyboard shortcuts: z to undo last point, s to save, space to skip."
+Visual Feedback,            Draw dynamic lines from the center to the current mouse position to help alignment.
+Persistence Layer,          "Use json for ""work-in-progress"" saves and pandas for final CSV export."
+Math Engine,                Calculate Euclidean distance d=(x2​−x1​)2+(y2​−y1​)2​ to determine radius.
+
+5. Error Scenarios & Handling
+Misclick: An "Undo" button (or Ctrl+Z) will remove the last captured coordinate.
+
+Accidental Closure: The app will auto-save to temp_data.json after every 3 clicks.
+
+Out-of-Order Entry: Users can select a specific month from a list to re-digitize if they realize a previous entry was wrong.
+
+6. Verification Plan
+Unit Test: Verify the distance calculation formula with known pixel coordinates.
+
+Visual Check: Overlay the extracted data points back onto the image; they should perfectly align with the edges of the original wedges.
+
+Data Integrity: Ensure the final CSV has exactly 24 rows and all category columns are populated with non-negative numbers.
