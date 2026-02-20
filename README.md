@@ -1,37 +1,57 @@
 # Nightingale Advanced Digitizer
+<img width="194" height="148" alt="image" src="https://github.com/user-attachments/assets/24016509-bf59-4f93-a1f2-b9aea6480c4a" />
 
-## Description
-This application is a data digitization tool designed to extract coordinates from the "Nightingale-mortality.jpg" image. It provides a graphical user interface (GUI) built with `tkinter` and `matplotlib` to allow users to interactively mark specific data points (Origin, Red, Blue, Black) on the image.
+## The Story
+This is the Nightingale Rose diagram from 19th century that shows a polar plot with unequal sector radii. Nightingale initially used it to demonstrate that the death rate of soldiers in the crimean war due to poor sanitation was far higher than the direct combat death rate, thus successfully persuading the government to improve medical and sanitation conditions. 
 
-The tool allows you to:
+## How the Data Was Collected
+This application is a data digitization tool designed to extract coordinates from the "Nightingale-mortality.jpg" image. It provides a graphical user interface (GUI) built with library tkinter and matplotlib to allow users to interactively mark specific data points (Origin, Red, Blue, Black) on the image.
+The tool allows user to:
 - Mark an **Origin** point using the mouse.
 - Mark **Red**, **Blue**, and **Black** data points using keyboard shortcuts.
+- The program records the pixel coordinates (x, y) of each point on the image. 
 - Navigate (pan/zoom) the image.
 - Save grouped data points into a nested dictionary structure.
 - Export the collected data to a JSON file (`digitized_data.json`) upon exit.
 
-## Prerequisites
-Ensure you have Python installed along with the following libraries:
+## The Math and Visualization
+1. from coordinates to radius (r) 
+using the euclidean distance formula, the distance from the classification marker (xi, yi) to the center point (x0, y0) is calculated from the coordinates to the radius (r). this distance is the pixel radius r of the sector. 
+<img width="828" height="191" alt="Screenshot From 2026-02-19 19-51-09" src="https://github.com/user-attachments/assets/5aedaf88-6c7e-4b83-a72a-856f384bb9b4" />
 
-- `tkinter` (usually comes with Python)
-- `matplotlib`
-- `Pillow` (PIL)
-- `numpy`
+2. the direct proportionality between area and value 
+nightingale's core design principle is that the area 'a' of the sector is directly proportional to the number of deaths. at a fixed angle (e.g., 30∘ or π/6 radians per month), the formula for calculating the sector area is: 
+<img width="426" height="189" alt="Screenshot From 2026-02-19 19-53-31" src="https://github.com/user-attachments/assets/a3ff3547-f656-47a0-b18c-12cbb5ab84a3" />
+since θ is a constant for all sectors, therefore: a∝r²
 
-## Installation
-1.  Clone the repository or download the source code.
-2.  Install the required dependencies:
-    ```bash
-    pip install matplotlib pillow numpy
-    ```
-3.  Ensure the image file `Nightingale-mortality.jpg` is present in the same directory as the script.
+This means that if we want to compare mortality rates over two months, we are comparing the square of the radius. this is precisely where nightingale's brilliance lies—she knew that human vision perceives area more strongly than length. 
 
-## Usage
+## The Visualization
 
-1.  Run the application:
-    ```bash
-    python realapp.py
-    ```
+![Rose Diagram](output/nightingalemortality.jpg)
+
+## Key Insights
+
+## Technical Details
+
+- Language: Python  
+- Libraries:
+    - `tkinter` (usually comes with Python)
+    - `matplotlib`
+    - `Pillow` (PIL)
+    - `numpy`
+- Files:
+    GUI_digitizer.py        Nightingale-mortality.jpg   digitized_data.json
+    'Implementatioin Plan'   README.md                   requirements.txt
+
+
+## How to Run
+
+1. Clone this repository.  
+2. Create and activate a virtual environment (optional).  
+3. Install requirements (if you have a `requirements.txt`).  
+4. Run the plotting script:  
+   `python3 GUI_digitizer.py`  
 
 2.  **Controls**:
     - **Mode Switching**: Click the button at the top left to toggle between "Digitize (Crosshair)" and "Navigate (Pan/Zoom)" modes.
@@ -52,20 +72,12 @@ Ensure you have Python installed along with the following libraries:
     - When you close the window, you will be prompted to save the data.
     - If you choose "Yes", the data will be exported to `digitized_data.json`.
 
-## Output
-The data is saved in `digitized_data.json` with the following structure:
+## What I Learned
 
-```json
-{
-    "Group_1": {
-        "Origin": [x, y],
-        "Red": [x, y],
-        "Blue": [x, y],
-        "Black": [x, y]
-    },
-    "Group_2": {
-        ...
-    }
-}
-```
+[2–3 sentences written entirely by you: technical lessons and reflections.]
+
+## References
+
+- [Short list of sources or links you used.]
 # Nightingale Rose Project
+
