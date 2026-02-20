@@ -1,7 +1,10 @@
 # Nightingale Advanced Digitizer
 
-## Description
-This application is a data digitization tool designed to extract coordinates from the "Nightingale-mortality.jpg" image. It provides a graphical user interface (GUI) built with `tkinter` and `matplotlib` to allow users to interactively mark specific data points (Origin, Red, Blue, Black) on the image.
+## The Story
+This is the Nightingale Rose diagram from 19th century that shows a polar plot with unequal sector radii. Nightingale initially used it to demonstrate that the death rate of soldiers in the crimean war due to poor sanitation was far higher than the direct combat death rate, thus successfully persuading the government to improve medical and sanitation conditions. 
+
+## How the Data Was Collected
+This application is a data digitization tool designed to extract coordinates from the "Nightingale-mortality.jpg" image. It provides a graphical user interface (GUI) built with library tkinter and matplotlib to allow users to interactively mark specific data points (Origin, Red, Blue, Black) on the image.
 
 The tool allows you to:
 - Mark an **Origin** point using the mouse.
