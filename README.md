@@ -76,8 +76,7 @@ This means that if we want to compare mortality rates over two months, we are co
 
 ## What I Learned
 
-[2–3 sentences written entirely by you: technical lessons and reflections.]
+Through this project, I gained a deeper understanding of how to bridge the gap between historical static model and modern digital analysis by building a custom coordinate extraction tool. When ensuring that the mathematical translation from pixel Euclidean distance to polar area remained historically accurate.
 
 ## References
-
-- [Short list of sources or links you used.]
+- Nightingale’s Original Diagrams - The Florence Nightingale image
